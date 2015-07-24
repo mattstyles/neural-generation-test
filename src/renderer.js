@@ -62,8 +62,8 @@ export default class Renderer {
         ctx.arc( node.pos.x, node.pos.y, node.r, 0, TWO_PI, false )
         ctx.fill()
 
-        ctx.fillStyle = '#000'
-        ctx.fillText( node.id, node.pos.x - 4, node.pos.y + 3 )
+        // ctx.fillStyle = '#000'
+        // ctx.fillText( node.id, node.pos.x - 4, node.pos.y + 3 )
     }
 
 }
