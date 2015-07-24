@@ -1,7 +1,11 @@
 
 const CONSTANTS = {
-    WIDTH: window.innerWidth,
-    HEIGHT: window.innerHeight,
+    WIDTH: window.innerWidth * window.devicePixelRatio,
+    HEIGHT: window.innerHeight * window.devicePixelRatio,
+    STYLE: {
+        'transform': 'scale(' + ( 1 / window.devicePixelRatio ) + ')',
+        'transformOrigin': 'top left'
+    },
 
     NODE: {
         MIN_SIZE: 4,

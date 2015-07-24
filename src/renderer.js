@@ -5,6 +5,9 @@ const canvas = document.createElement( 'canvas' )
 const ctx = canvas.getContext( '2d' )
 canvas.setAttribute( 'width', CONSTANTS.WIDTH )
 canvas.setAttribute( 'height', CONSTANTS.HEIGHT )
+Object.keys( CONSTANTS.STYLE ).forEach( style => {
+    canvas.style[ style ] = CONSTANTS.STYLE[ style ]
+})
 document.body.appendChild( canvas )
 
 // const blue = 'rgb( 72, 72, 218 )'
