@@ -129,6 +129,7 @@ function attractNode( node, dest ) {
 
     // Brute force the interpolation required to get outside the radius
     // This is pretty expensive
+    // @TODO Also pretty sure this is fairly inaccurate, there should be a better way
     let val = 1
     let l = vec2.lerp( val )
     let newPos = node.fakeAdd( l )
@@ -167,7 +168,7 @@ function checkOverlap( node ) {
 
 function createNode() {
     // Skew size to favour smaller nodes
-    let node = new Node( ...getRandomPosition(), Math.pow( Math.random(), 1.6 ) )
+    let node = new Node( ...getRandomPosition(), Math.pow( Math.random(), CONSTANTS.NODE.SIZE_BIAS ) )
 
     // console.log( node.id, 'create pos', node.pos.x, node.pos.y )
 
@@ -195,16 +196,9 @@ function createNode() {
 }
 
 
-
-
-const gui = new Gui()
-gui.register( 'Create', createNode )
-gui.register( 'Find Closest', () => {
-    let node = nodes[ nodes.length - 1 ]
-    console.log( findClosest( node ) )
-})
-
-
+/**
+ * Create a number of nodes, with a little delay just for visuals
+ */
 function createNodes( num ) {
 
     function create() {
@@ -219,6 +213,24 @@ function createNodes( num ) {
     create()
 }
 
+
+
+let createParams = {
+    num: 100
+}
+
+const gui = new Gui( createParams )
+gui.register( 'Create', createNode )
+gui.register( 'Create Nodes', () => {
+    createNodes( createParams.num )
+})
+// gui.register( 'Find Closest', () => {
+//     let node = nodes[ nodes.length - 1 ]
+//     console.log( findClosest( node ) )
+// })
+
+
+// Kickstart initial generation
 createNodes( CONSTANTS.NUM_NODES )
 
 window.r = renderer

@@ -8,6 +8,10 @@ export default class Gui extends EventEmitter {
 
         this.props = props
         this.gui = new dat.GUI()
+
+        this.gui.add( props, 'num', 0, 500 )
+            .step( 10 )
+            .onFinishChange( this.onChange )
     }
 
     register( name, fn ) {
