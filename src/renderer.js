@@ -41,7 +41,9 @@ function lerpColor( value ) {
 
 export default class Renderer {
     constructor() {
-        ctx.clearRect( 0, 0, CONSTANTS.WIDTH, CONSTANTS.HEIGHT )
+        this.clear()
+
+        ctx.font = '11px "dejavu sans mono"'
     }
 
     getColor( value ) {
@@ -49,13 +51,19 @@ export default class Renderer {
         return ' rgb(' + Object.keys( color ).map( key => color[ key ] ).join( ',' ) + ')'
     }
 
-    renderNode( node ) {
-        console.log( 'rendering node', node )
+    clear() {
+        ctx.clearRect( 0, 0, CONSTANTS.WIDTH, CONSTANTS.HEIGHT )
+    }
+
+    renderNode = ( node ) => {
         ctx.fillStyle = this.getColor( node.r / CONSTANTS.NODE.MAX_SIZE )
 
         ctx.beginPath()
         ctx.arc( node.pos.x, node.pos.y, node.r, 0, TWO_PI, false )
         ctx.fill()
+
+        ctx.fillStyle = '#000'
+        ctx.fillText( node.id, node.pos.x - 4, node.pos.y + 3 )
     }
 
 }

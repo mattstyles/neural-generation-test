@@ -3,14 +3,17 @@
 //import Gui from './gui'
 import CONSTANTS from './constants'
 import Renderer from './renderer'
+import Gui from './gui'
 
 import { lerpSize } from './util'
 
 const renderer = new Renderer()
 
+let count = 0
 
 class Node {
     constructor( x, y, size ) {
+        this.id = ++count
         this.pos = {}
         this.pos.x = x
         this.pos.y = y
@@ -19,6 +22,12 @@ class Node {
 }
 
 let nodes = []
+
+
+function render() {
+    renderer.clear()
+    nodes.forEach( renderer.renderNode )
+}
 
 function getRandomPosition() {
     return [
@@ -36,11 +45,22 @@ function findClosest( node ) {
         throw new Error( 'nodes list empty' )
     }
 
-    let min = 0
+    let min = 1e8
 
     return nodes.reduce( ( prev, curr ) => {
-        return distance( node, curr ) > min ? prev : curr
-    })
+        // Dont return yourself
+        if ( node.id === curr.id ) {
+            return prev
+        }
+
+        let dist = distance( node, curr )
+        if ( dist < min ) {
+            min = dist
+            return curr
+        }
+
+        return prev
+    }, nodes[ 0 ] )
 }
 
 function createNode() {
@@ -48,8 +68,10 @@ function createNode() {
     let node = new Node( ...getRandomPosition(), Math.pow( Math.random(), 1.6 ) )
 
     // Position it
+
+    // Add to global array and render
     nodes.push( node )
-    renderer.renderNode( node )
+    render()
 
     return node
 }
@@ -57,9 +79,14 @@ function createNode() {
 
 
 
-
-
-
+const gui = new Gui()
+gui.register( 'Create', () => {
+    console.log( createNode() )
+})
+gui.register( 'Find Closest', () => {
+    let node = nodes[ nodes.length - 1 ]
+    console.log( findClosest( node ) )
+})
 
 
 window.r = renderer
