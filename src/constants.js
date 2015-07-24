@@ -9,19 +9,20 @@ const CONSTANTS = {
 
     NODE: {
         MIN_SIZE: 4,
-        MAX_SIZE: 6,
+        MAX_SIZE: 8,
         // 1 is linear, 2 is quadratic (thus greatly favouring smaller sizes)
         SIZE_BIAS: 4.8
     },
 
     // number of nodes to create
-    NUM_NODES: 400,
+    NUM_NODES: 600,
 
     // delay between creating nodes
     NODE_CREATE_DELAY: 1,
 
     // a little buffer when the nodes snap to central structure
     NODE_SNAP_BUFFER: 2,
+    NODE_SNAP_VARIANCE: 8,
 
     NODE_END_COLOUR: {
         r: 217,

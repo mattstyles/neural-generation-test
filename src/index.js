@@ -114,7 +114,7 @@ function attractNode( node, dest ) {
     let vec2 = new Vector2( node, dest )
 
     // Calc interpolation from vector mag
-    let rad = dest.r + node.r + CONSTANTS.NODE_SNAP_BUFFER
+    let rad = dest.r + node.r + ( CONSTANTS.NODE_SNAP_BUFFER + ( Math.random() * CONSTANTS.NODE_SNAP_VARIANCE ) )
     let perc = 1 - ( rad / vec2.magnitude() )
 
     node.moveBy( vec2.lerp( perc ) )
