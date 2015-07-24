@@ -15,7 +15,18 @@ const CONSTANTS = {
     NODE_CREATE_DELAY: 100,
 
     // a little buffer when the nodes snap to central structure
-    NODE_SNAP_BUFFER: 5
+    NODE_SNAP_BUFFER: 5,
+
+    NODE_START_COLOUR: {
+        r: 253,
+        g: 227,
+        b: 167
+    },
+    NODE_END_COLOUR: {
+        r: 211,
+        g: 84,
+        b: 0
+    }
 }
 
 

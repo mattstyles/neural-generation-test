@@ -82,10 +82,12 @@ function getRandomPosition() {
     ]
 }
 
+// Squaring and rooting is fairly expensive
 function euclidean( node1, node2 ) {
     return Math.sqrt( Math.pow( node1.pos.x - node2.pos.x, 2 ) + Math.pow( node1.pos.y - node2.pos.y, 2 ) )
 }
 
+// Quick, struggles with diagonals, will give false results
 function manhattan( node1, node2 ) {
     return Math.abs( node1.pos.x - node2.pos.x ) + Math.abs( node1.pos.y - node2.pos.y )
 }

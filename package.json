@@ -1,7 +1,7 @@
 {
   "name": "neural-generation-test",
   "version": "0.0.0",
-  "description": "Testing the simplex noise generation algorithm",
+  "description": "Procedurally generates a structure, looks a bit like a neuron",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

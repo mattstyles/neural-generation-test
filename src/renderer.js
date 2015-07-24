@@ -1,5 +1,4 @@
 
-import { lerpSize } from './util'
 import CONSTANTS from './constants'
 
 const canvas = document.createElement( 'canvas' )
@@ -18,18 +17,8 @@ document.body.appendChild( canvas )
 // const white = 'rgb( 221, 224, 234 )'
 
 const TWO_PI = 2 * Math.PI
-
-const s = {
-    r: 253,
-    g: 227,
-    b: 167
-}
-
-const e = {
-    r: 211,
-    g: 84,
-    b: 0
-}
+const s = CONSTANTS.NODE_START_COLOUR
+const e = CONSTANTS.NODE_END_COLOUR
 
 function lerpColor( value ) {
     return [ 'r', 'g', 'b' ].reduce( ( prev, curr ) => {
