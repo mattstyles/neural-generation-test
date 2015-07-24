@@ -175,7 +175,6 @@ function createNode() {
     // @TODO should check this doesnt happen too often, a full area will
     // cause this to loop
     if ( checkOverlap( node ) ) {
-        console.log( 'recreating' )
         return createNode()
     }
 
