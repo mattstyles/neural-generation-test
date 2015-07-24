@@ -48,7 +48,7 @@ export default class Renderer {
     }
 
     renderNode = ( node ) => {
-        ctx.fillStyle = this.getColor( node.r / CONSTANTS.NODE.MAX_SIZE )
+        ctx.fillStyle = node.color || this.getColor( node.r / CONSTANTS.NODE.MAX_SIZE )
 
         ctx.beginPath()
         ctx.arc( node.pos.x, node.pos.y, node.r, 0, TWO_PI, false )

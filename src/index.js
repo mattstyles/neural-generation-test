@@ -6,7 +6,7 @@ import Renderer from './renderer'
 import Gui from './gui'
 import EventEmitter from 'events'
 
-import { lerpSize } from './util'
+import { lerpSize, Point, Vector2 } from './util'
 
 const renderer = new Renderer()
 
@@ -14,22 +14,25 @@ const renderer = new Renderer()
 const events = new EventEmitter()
 events.on( 'update', render )
 
-class Point {
-    constructor( x, y ) {
-        this.x = x
-        this.y = y
-    }
-}
+
 
 let count = 0
 class Node {
-    constructor( x, y, size ) {
+    constructor( x, y, size, color ) {
         this.id = ++count
         this.pos = new Point( x, y )
         this.r = lerpSize( size )
+        this.color = color || null
     }
 
     moveBy( point ) {
+        // nodes.push( new Node(
+        //     this.pos.x,
+        //     this.pos.y,
+        //     this.r / CONSTANTS.NODE.MAX_SIZE,
+        //     'rgb( 120, 120, 120 )'
+        //  ))
+
         this.pos.x += point.x
         this.pos.y += point.y
 
@@ -49,23 +52,6 @@ class Node {
 }
 
 
-
-class Vector2 {
-    constructor( src, dest ) {
-        this.x = dest.pos.x - src.pos.x
-        this.y = dest.pos.y - src.pos.y
-    }
-
-    normalize() {
-        let r = Math.max( this.x, this.y )
-        this.x *= r
-        this.y *= r
-    }
-
-    lerp( value ) {
-        return new Point( this.x * value, this.y * value )
-    }
-}
 
 let nodes = []
 
@@ -127,20 +113,11 @@ function attractNode( node, dest ) {
 
     let vec2 = new Vector2( node, dest )
 
-    // Brute force the interpolation required to get outside the radius
-    // This is pretty expensive
-    // @TODO Also pretty sure this is fairly inaccurate, there should be a better way
-    let val = 1
-    let l = vec2.lerp( val )
-    let newPos = node.fakeAdd( l )
-    while( euclidean( newPos, dest ) < dest.r + node.r + CONSTANTS.NODE_SNAP_BUFFER ) {
-        val -= 0.05
+    // Calc interpolation from vector mag
+    let rad = dest.r + node.r + CONSTANTS.NODE_SNAP_BUFFER
+    let perc = 1 - ( rad / vec2.magnitude() )
 
-        l = vec2.lerp( val )
-        newPos = node.fakeAdd( l )
-    }
-
-    node.moveBy( vec2.lerp( val ) )
+    node.moveBy( vec2.lerp( perc ) )
 }
 
 /**
