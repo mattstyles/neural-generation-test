@@ -5,7 +5,7 @@ const CONSTANTS = {
 
     NODE: {
         MIN_SIZE: 4,
-        MAX_SIZE: 24
+        MAX_SIZE: 4
     }
 
 }
