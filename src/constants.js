@@ -9,9 +9,9 @@ const CONSTANTS = {
 
     NODE: {
         MIN_SIZE: 4,
-        MAX_SIZE: 8,
-        // 1 is linear, 2 is quadratic (thus greatly favouring smaller sizes)
-        SIZE_BIAS: 4.8
+        MAX_SIZE: 16,
+        // 1 is linear, 2 is quadratic (thus favouring smaller sizes)
+        SIZE_BIAS: 1.2
     },
 
     // number of nodes to create
@@ -33,6 +33,11 @@ const CONSTANTS = {
         r: 224,
         g: 130,
         b: 131
+    },
+
+    // seed params
+    SEED: {
+        NUM: 3
     }
 }
 

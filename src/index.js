@@ -143,7 +143,9 @@ function checkOverlap( node ) {
     return overlap
 }
 
-function createNode() {
+function createNode( options ) {
+    let opts = options || {}
+
     // Skew size to favour smaller nodes
     let node = new Node( ...getRandomPosition(), Math.pow( Math.random(), CONSTANTS.NODE.SIZE_BIAS ) )
 
@@ -157,7 +159,7 @@ function createNode() {
     }
 
     // Position it
-    if ( nodes.length ) {
+    if ( nodes.length && !opts.float ) {
         let dest = findClosest( node )
 
         attractNode( node, dest )
@@ -190,7 +192,17 @@ function createNodes( num ) {
     create()
 }
 
-
+/**
+ * Creates a few nodes to act as a seed
+ */
+function seedMap() {
+    let i = CONSTANTS.SEED.NUM
+    while( i-- > 0 ) {
+        createNode({
+            float: true
+        })
+    }
+}
 
 let createParams = {
     num: 100
@@ -208,6 +220,7 @@ gui.register( 'Create Nodes', () => {
 
 
 // Kickstart initial generation
+seedMap()
 createNodes( CONSTANTS.NUM_NODES )
 
 window.r = renderer
