@@ -2,8 +2,8 @@
 const CONSTANTS = {
     // WIDTH: window.innerWidth * window.devicePixelRatio,
     // HEIGHT: window.innerHeight * window.devicePixelRatio,
-    WIDTH: 640,
-    HEIGHT: 640,
+    WIDTH: 64,
+    HEIGHT: 64,
     STYLE: {
         'transform': 'scale(' + ( 1 / window.devicePixelRatio ) + ')',
         'transformOrigin': 'top left',
@@ -14,14 +14,14 @@ const CONSTANTS = {
     },
 
     NODE: {
-        MIN_SIZE: 4,
-        MAX_SIZE: 16,
+        MIN_SIZE: 2,
+        MAX_SIZE: 6,
         // 1 is linear, 2 is quadratic (thus favouring smaller sizes)
         SIZE_BIAS: 1.2
     },
 
     // number of nodes to create
-    NUM_NODES: 160,
+    NUM_NODES: 4,
 
     // delay between creating nodes
     NODE_CREATE_DELAY: 1,
