@@ -3,6 +3,7 @@ import CONSTANTS from './constants'
 
 const canvas = document.createElement( 'canvas' )
 const ctx = canvas.getContext( '2d' )
+canvas.setAttribute( 'id', 'arc' )
 canvas.setAttribute( 'width', CONSTANTS.WIDTH )
 canvas.setAttribute( 'height', CONSTANTS.HEIGHT )
 Object.keys( CONSTANTS.STYLE ).forEach( style => {
@@ -36,6 +37,9 @@ export default class Renderer {
         this.clear()
 
         ctx.font = '11px "dejavu sans mono"'
+
+        this.canvas = canvas
+        this.ctx = ctx
     }
 
     getColor( value ) {
@@ -57,5 +61,7 @@ export default class Renderer {
         // ctx.fillStyle = '#000'
         // ctx.fillText( node.id, node.pos.x - 4, node.pos.y + 3 )
     }
-
 }
+
+window.canvas = canvas
+window.ctx = ctx

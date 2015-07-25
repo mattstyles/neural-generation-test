@@ -1,15 +1,15 @@
 
+import EventEmitter from 'events'
 
-//import Gui from './gui'
 import CONSTANTS from './constants'
 import Renderer from './renderer'
 import Gui from './gui'
-import EventEmitter from 'events'
+import Sampler from './sampler'
 
 import { lerpSize, Point, Vector2 } from './util'
 
 const renderer = new Renderer()
-
+const sampler = new Sampler( renderer.ctx )
 
 const events = new EventEmitter()
 events.on( 'update', render )
@@ -204,8 +204,10 @@ function seedMap() {
     }
 }
 
+
 let createParams = {
-    num: 100
+    num: 100,
+    sampleSize: 2
 }
 
 const gui = new Gui( createParams )
@@ -213,10 +215,11 @@ gui.register( 'Create', createNode )
 gui.register( 'Create Nodes', () => {
     createNodes( createParams.num )
 })
-// gui.register( 'Find Closest', () => {
-//     let node = nodes[ nodes.length - 1 ]
-//     console.log( findClosest( node ) )
-// })
+gui.register( 'Sample', () => {
+    sampler.sample( Math.pow( 2, createParams.sampleSize ) )
+    sampler.render()
+    renderer.canvas.style.display = 'none'
+})
 
 
 // Kickstart initial generation
@@ -232,3 +235,5 @@ window.createNodes = createNodes
 window.findClosest = findClosest
 window.euclidean = euclidean
 window.manhattan = manhattan
+
+window.sampler = sampler

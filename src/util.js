@@ -5,11 +5,21 @@ export function to1d( x, y ) {
 }
 
 export function max( map ) {
-    return map.reduce( ( prev, curr ) => curr > prev ? curr : prev, 0 )
+    // return map.reduce( ( prev, curr ) => curr > prev ? curr : prev, 0 )
+    let val = 0
+    for ( var i = 0; i < map.length; i++ ) {
+        val = map[ i ] > val ? map[ i ] : val
+    }
+    return val
 }
 
 export function min( map ) {
-    return map.reduce( ( prev, curr ) => curr < prev ? curr : prev, 0 )
+    //return map.reduce( ( prev, curr ) => curr < prev ? curr : prev, 0 )
+    let val = 0
+    for ( var i = 0; i < map.length; i++ ) {
+        val = map[ i ] < val ? map[ i ] : val
+    }
+    return val
 }
 
 

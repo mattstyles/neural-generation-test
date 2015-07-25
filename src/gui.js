@@ -12,6 +12,9 @@ export default class Gui extends EventEmitter {
         this.gui.add( props, 'num', 0, 500 )
             .step( 10 )
             .onFinishChange( this.onChange )
+        this.gui.add( props, 'sampleSize', 0, 8 )
+            .step( 1 )
+            .onFinishChange( this.onChange )
     }
 
     register( name, fn ) {
