@@ -45,7 +45,7 @@ export default class Sampler {
                 count += this.image.data[ image1d( x, y ) ]
             }
         }
-        console.log( x1, y1, x2, y2, ~~( count / num ) )
+        // console.log( x1, y1, x2, y2, ~~( count / num ) )
         return ~~( count / num )
     }
 
@@ -87,7 +87,7 @@ export default class Sampler {
         //     ))
         // }
 
-        console.log( this.map )
+        // console.log( this.map )
         // console.log( 'min', min( this.map ) )
         // console.log( 'max', max( this.map ) )
     }

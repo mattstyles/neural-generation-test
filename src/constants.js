@@ -2,8 +2,8 @@
 const CONSTANTS = {
     // WIDTH: window.innerWidth * window.devicePixelRatio,
     // HEIGHT: window.innerHeight * window.devicePixelRatio,
-    WIDTH: 64,
-    HEIGHT: 64,
+    WIDTH: 2048,
+    HEIGHT: 2048,
     STYLE: {
         'transform': 'scale(' + ( 1 / window.devicePixelRatio ) + ')',
         'transformOrigin': 'top left',
@@ -14,14 +14,14 @@ const CONSTANTS = {
     },
 
     NODE: {
-        MIN_SIZE: 2,
-        MAX_SIZE: 6,
+        MIN_SIZE: 4,
+        MAX_SIZE: 24,
         // 1 is linear, 2 is quadratic (thus favouring smaller sizes)
-        SIZE_BIAS: 1.2
+        SIZE_BIAS: 3.4
     },
 
     // number of nodes to create
-    NUM_NODES: 4,
+    NUM_NODES: 800,
 
     // delay between creating nodes
     NODE_CREATE_DELAY: 1,
@@ -32,9 +32,9 @@ const CONSTANTS = {
 
     // large nodes
     NODE_END_COLOUR: {
-        r: 120,
-        g: 120,
-        b: 120
+        r: 245,
+        g: 245,
+        b: 245
     },
     // small nodes
     NODE_START_COLOUR: {
@@ -45,7 +45,7 @@ const CONSTANTS = {
 
     // seed params
     SEED: {
-        NUM: 2
+        NUM: 4
     }
 }
 

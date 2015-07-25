@@ -207,7 +207,7 @@ function seedMap() {
 
 let createParams = {
     num: 100,
-    sampleSize: 2
+    sampleSize: 4
 }
 
 const gui = new Gui( createParams )
@@ -218,6 +218,7 @@ gui.register( 'Create Nodes', () => {
 gui.register( 'Sample', () => {
     sampler.sample( Math.pow( 2, createParams.sampleSize ) )
     sampler.render()
+    // renderer.canvas.style.opacity = '.25'
     renderer.canvas.style.display = 'none'
 })
 
