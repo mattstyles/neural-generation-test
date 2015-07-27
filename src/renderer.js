@@ -42,9 +42,14 @@ export default class Renderer {
         this.ctx = ctx
     }
 
-    getColor( value ) {
-        let color = lerpColor( value )
-        return ' rgb(' + Object.keys( color ).map( key => color[ key ] ).join( ',' ) + ')'
+    getColor( node ) {
+        // let color = lerpColor( value )
+        // return ' rgb(' + Object.keys( color ).map( key => color[ key ] ).join( ',' ) + ')'
+        let r = node.r / CONSTANTS.NODE.MAX_SIZE
+        let grd = ctx.createRadialGradient( node.pos.x, node.pos.y, node.r * .2, node.pos.x, node.pos.y, node.r * 1.2 )
+        grd.addColorStop( 0, ' rgba(' + Object.keys( e ).map( key => e[ key ] ).join( ',' ) + ')' )
+        grd.addColorStop( 1, ' rgba(' + Object.keys( s ).map( key => s[ key ] ).join( ',' ) + ')' )
+        return grd
     }
 
     clear() {
@@ -52,7 +57,8 @@ export default class Renderer {
     }
 
     renderNode = ( node ) => {
-        ctx.fillStyle = node.color || this.getColor( node.r / CONSTANTS.NODE.MAX_SIZE )
+        // ctx.fillStyle = node.color || this.getColor( node.r / CONSTANTS.NODE.MAX_SIZE )
+        ctx.fillStyle = this.getColor( node )
 
         ctx.beginPath()
         ctx.arc( node.pos.x, node.pos.y, node.r, 0, TWO_PI, false )

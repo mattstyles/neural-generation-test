@@ -264,8 +264,8 @@ gui.register( 'multipass', () => {
         height: sampler.mapHeight
     })
         .mutate2d( ( x, y ) => {
-            return 255 - sampler.map[ x + y * sampler.mapWidth ]
-            // return sampler.map[ x + y * sampler.mapWidth ]
+            // return 255 - sampler.map[ x + y * sampler.mapWidth ]
+            return sampler.map[ x + y * sampler.mapWidth ]
         })
         .neutralize()
         .expand( Math.pow( 2, createParams.sampleSize ) )
@@ -273,13 +273,14 @@ gui.register( 'multipass', () => {
         weight: 5,
         map: sampleMap
     })
-    for ( let i = 1; i <= 1 + createParams.sampleSize; i++ ) {
+    // for ( let i = 1; i <= 1 + createParams.sampleSize; i++ ) {
+    for ( let i = 1; i <= 1 + 1; i++ ) {
         let simplex = new Simplex({
             min: 0,
             max: 1,
             octaves: 4,
-            frequency: .01 + ( i * .02 ),
-            persistence: .5,
+            frequency: .005 + ( i * .005 ),
+            persistence: .2,
             amplitude: 1 * ( 1 / i )
         })
         let map = new HeightMap({
