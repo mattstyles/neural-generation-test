@@ -116,6 +116,18 @@ export default class HeightMap {
         return this.map[ this.to1d( x, y ) ]
     }
 
+    getRegion( x1, y1, x2, y2 ) {
+        let region = []
+
+        for ( let y = y1; y <= y2; y++ ) {
+            for ( let x = x1; x <= x2; x++ ) {
+                region.push( this.map[ this.to1d( x, y ) ] )
+            }
+        }
+
+        return region
+    }
+
     debug() {
         for ( let y = 0; y < this.height; y++ ) {
             let row = []

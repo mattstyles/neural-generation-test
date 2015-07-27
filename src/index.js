@@ -1,16 +1,28 @@
 
 import EventEmitter from 'events'
+import Simplex from 'fast-simplex-noise'
 
 import CONSTANTS from './constants'
 import Renderer from './renderer'
 import Gui from './gui'
 import Sampler from './sampler'
 import HeightMap from './heightMap'
+import MapRender from './mapRender'
 
-import { lerpSize, Point, Vector2 } from './util'
+import { lerpSize, Point, Vector2, max, min } from './util'
 
 const renderer = new Renderer()
 const sampler = new Sampler( renderer.ctx )
+const mapRender = new MapRender()
+
+const simplex = new Simplex({
+    min: 0,
+    max: 1,
+    octaves: 4,
+    frequency: .01,
+    persistence: .5,
+    amplitude: 1
+})
 
 const events = new EventEmitter()
 events.on( 'update', render )
@@ -222,6 +234,28 @@ gui.register( 'Sample', () => {
     // renderer.canvas.style.opacity = '.25'
     renderer.canvas.style.display = 'none'
 })
+gui.register( 'Add Noise', () => {
+    let map = new HeightMap({
+        width: sampler.mapWidth,
+        height: sampler.mapHeight
+    })
+        .mutate2d( ( x, y ) => {
+            return sampler.map[ x + y * sampler.mapWidth ]
+        })
+        .neutralize()
+        // .mutate2d( function( x, y ) {
+        //     return 1 - this.getValue( x, y )
+        // })
+        .expand( Math.pow( 2, createParams.sampleSize ) )
+        .mutate2d( function( x, y ) {
+            return ( this.getValue( x, y ) * simplex.get2DNoise( x, y ) )
+        })
+
+    window.map = map
+
+    let Render = new MapRender()
+    Render.render( map )
+})
 
 
 // Kickstart initial generation
@@ -237,6 +271,8 @@ window.createNodes = createNodes
 window.findClosest = findClosest
 window.euclidean = euclidean
 window.manhattan = manhattan
+window.max = max
+window.min = min
 
 window.sampler = sampler
 window.HeightMap = HeightMap
