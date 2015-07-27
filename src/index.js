@@ -256,6 +256,51 @@ gui.register( 'Add Noise', () => {
     let Render = new MapRender()
     Render.render( map )
 })
+gui.register( 'multipass', () => {
+    let maps = []
+    console.log( sampler.mapWidth )
+    let sampleMap = new HeightMap({
+        width: sampler.mapWidth,
+        height: sampler.mapHeight
+    })
+        .mutate2d( ( x, y ) => {
+            return 255 - sampler.map[ x + y * sampler.mapWidth ]
+            // return sampler.map[ x + y * sampler.mapWidth ]
+        })
+        .neutralize()
+        .expand( Math.pow( 2, createParams.sampleSize ) )
+    maps.push({
+        weight: 5,
+        map: sampleMap
+    })
+    for ( let i = 1; i <= 1 + createParams.sampleSize; i++ ) {
+        let simplex = new Simplex({
+            min: 0,
+            max: 1,
+            octaves: 4,
+            frequency: .01 + ( i * .02 ),
+            persistence: .5,
+            amplitude: 1 * ( 1 / i )
+        })
+        let map = new HeightMap({
+            width: CONSTANTS.WIDTH,
+            height: CONSTANTS.HEIGHT
+        }).mutate2d( ( x, y ) => {
+            return simplex.get2DNoise( x, y )
+        })
+        maps.push({
+            weight: i,
+            map: map
+        })
+    }
+    let map = new HeightMap({
+        width: CONSTANTS.WIDTH,
+        height: CONSTANTS.HEIGHT
+    }).multiPass( maps )
+
+    let Render = new MapRender()
+    Render.render( map )
+})
 
 
 // Kickstart initial generation

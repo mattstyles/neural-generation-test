@@ -112,6 +112,41 @@ export default class HeightMap {
         return this
     }
 
+    /**
+     * Creates a new map based on the passes
+     * @param passes <Array>
+     *   map <HeightMap>
+     *   weight <Number>
+     */
+    multiPass( passes ) {
+        let totalWeights = 0
+
+        // Quick check sizes
+        // Add up max weights at the same time
+        passes.forEach( pass => {
+            totalWeights += pass.weight
+
+            if ( pass.map.width !== this.width || pass.map.height !== this.width ) {
+                throw new Error( 'HeightMap::multiPass map sizes do not match' )
+            }
+        })
+
+        function getCell( i ) {
+            let cell = 0
+            for ( let p = 0; p < passes.length; p++ ) {
+                cell += passes[ p ].map.map[ i ] * passes[ p ].weight
+            }
+            return cell / totalWeights
+        }
+
+        // Iterate over each cell
+        for ( let i = 0; i < passes[ 0 ].map.map.length; i++ ) {
+            this.map[ i ] = getCell( i )
+        }
+
+        return this
+    }
+
     getValue( x, y ) {
         return this.map[ this.to1d( x, y ) ]
     }
