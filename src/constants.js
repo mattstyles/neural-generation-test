@@ -2,8 +2,8 @@
 const CONSTANTS = {
     // WIDTH: window.innerWidth * window.devicePixelRatio,
     // HEIGHT: window.innerHeight * window.devicePixelRatio,
-    WIDTH: 2048,
-    HEIGHT: 2048,
+    WIDTH: 512,
+    HEIGHT: 512,
     STYLE: {
         'transform': 'scale(' + ( 1 / window.devicePixelRatio ) + ')',
         'transformOrigin': 'top left',
@@ -21,7 +21,7 @@ const CONSTANTS = {
     },
 
     // number of nodes to create
-    NUM_NODES: 800,
+    NUM_NODES: 80,
 
     // delay between creating nodes
     NODE_CREATE_DELAY: 1,
@@ -45,7 +45,7 @@ const CONSTANTS = {
 
     // seed params
     SEED: {
-        NUM: 4
+        NUM: 2
     }
 }
 

@@ -5,6 +5,7 @@ import CONSTANTS from './constants'
 import Renderer from './renderer'
 import Gui from './gui'
 import Sampler from './sampler'
+import HeightMap from './heightMap'
 
 import { lerpSize, Point, Vector2 } from './util'
 
@@ -238,3 +239,4 @@ window.euclidean = euclidean
 window.manhattan = manhattan
 
 window.sampler = sampler
+window.HeightMap = HeightMap

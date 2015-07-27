@@ -45,7 +45,6 @@ export default class Sampler {
                 count += this.image.data[ image1d( x, y ) ]
             }
         }
-        // console.log( x1, y1, x2, y2, ~~( count / num ) )
         return ~~( count / num )
     }
 
@@ -64,32 +63,8 @@ export default class Sampler {
                     x + blockSize,
                     y + blockSize
                 ))
-                // let pixel = this.imageCtx.getImageData( x, y, x + 1, y + 1 )
-                // let count = 0
-                // let num = 0
-                // for( let i = 0; i < pixel.data.length; i += 4 ) {
-                //     num++
-                //     count += pixel.data[ i ]
-                // }
-                // this.map.push( ~~( count / num ) )
             }
         }
-
-        // for ( let i = 0; i < this.image.data.length; i += 4 ) {
-        //     // Aggregate all pixels in block
-        //     // console.log( i )
-        //     let tl = image2d( i )
-        //     this.map.push( this._sampleBlock(
-        //         tl.x,
-        //         tl.y,
-        //         tl.x + ( blockSize ),
-        //         tl.y + ( blockSize )
-        //     ))
-        // }
-
-        // console.log( this.map )
-        // console.log( 'min', min( this.map ) )
-        // console.log( 'max', max( this.map ) )
     }
 
     // Greyscale
